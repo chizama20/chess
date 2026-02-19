@@ -1,15 +1,29 @@
 import chess
-import chess.svg
 
-board = chess.Board("8/8/8/8/4N3/8/8/8 w - - 0 1")
+class Engine:
+    def evaluate():
+        pass
+    def cycle():
+        pass
+    def best_move():
+        pass
 
-svg = chess.svg.board(
-    board,
-    fill=dict.fromkeys(board.attacks(chess.E4), "#cc0000cc"),
-    arrows=[chess.svg.Arrow(chess.E4, chess.F6, color="#0000cccc")],
-    squares=chess.SquareSet(chess.BB_DARK_SQUARES & chess.BB_FILE_B),
-    size=350,
-)
+def main():
+    board = chess.Board()
+    start = True
 
-with open("board.svg", "w") as f:
-    f.write(svg)
+    while not board.is_game_over():
+        print(board)
+        
+        if board.turn == chess.WHITE:
+            move = input("Enter a move: ")
+            board.push_san(move)
+        else:
+            engine = Engine()
+            move = engine.best_move(board)
+            board.parse_san(move)
+    print("Game Over")
+
+
+if __name__=="__main__":
+    main()
