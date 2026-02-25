@@ -15,7 +15,7 @@ def main():
     
     while not board.is_game_over():
         print(board)
-        legal = list(board.legal_moves)    
+        legal = [board.legal_moves]    
         if board.turn == chess.WHITE:
             print(legal)
             move = input("Enter a move: ")
