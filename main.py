@@ -20,7 +20,7 @@ class Engine:
                     evalScore -= value 
         return evalScore
     
-    def minimax(self, board, depth, maximizingPlayer):
+    def minimax(self, board, depth, maximizingPlayer, alpha=float('-inf'), beta=float('inf')):
         if depth == 0 or board.is_game_over():
             return self.evaluate(board)
         
@@ -28,29 +28,36 @@ class Engine:
             maxEval = float('-inf')
             for move in board.legal_moves:
                 board.push(move)
-                eval = self.minimax(board, depth - 1, False)
+                eval = self.minimax(board, depth - 1, False, alpha, beta)
                 board.pop()
                 maxEval = max(maxEval, eval)
+                alpha = max(maxEval, alpha)
+                if beta <= alpha:
+                    break
             return maxEval
         else:
             minEval = float('inf')
             for move in board.legal_moves:
                 board.push(move)
-                eval = self.minimax(board, depth - 1, True)
+                eval = self.minimax(board, depth - 1, True, alpha, beta)
                 board.pop()
                 minEval = min(minEval, eval)
+                beta = min(minEval, beta)
+                if beta <= alpha:   
+                    break
             return minEval
 
-    def best_move(self, board, depth=3):
+    def best_move(self, board, depth=3, alpha=float('-inf'), beta=float('inf')):
         bestMove = None
         bestScore = float('-inf')
         for move in board.legal_moves:
             board.push(move)
-            score = self.minimax(board, depth - 1, False)
+            score = self.minimax(board, depth - 1, False, alpha, beta)
             board.pop()
             if score > bestScore:
                 bestScore = score
                 bestMove = move
+            alpha = max(alpha, bestScore)
         return bestMove
         
 def main():
