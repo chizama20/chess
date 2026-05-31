@@ -2,7 +2,7 @@ import berserk
 import chess
 from python.main import Engine
 
-TOKEN = "lip_RRPuCrjOtIitAmazBv7M"
+TOKEN = "your_lichess_api_token_here"
 
 session = berserk.TokenSession(TOKEN)
 client = berserk.Client(session)
