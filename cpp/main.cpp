@@ -1,5 +1,10 @@
 #include <iostream>
 
+class Board {
+
+};
+
+
 int main(){
     std::cout << "Hello, World!" << std::endl;
 
