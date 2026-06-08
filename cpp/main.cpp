@@ -1,7 +1,66 @@
 #include <iostream>
+#include <cstdint>
 
-class Board {
+struct Board { // 0
+    uint64_t king[2];
+    uint64_t queen[2];
+    uint64_t rook[2];
+    uint64_t bishop[2];
+    uint64_t knight[2];
+    uint64_t pawn[2];
+    int move; // odd is black, even is white
+    
+    Board(
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         
+    ){
+
+    }
 };
 
 
