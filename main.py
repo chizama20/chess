@@ -1,7 +1,15 @@
-import chess
-import random
-# get uci (start pos + end pos) using move.uci()
-# check 
+# #import chess
+# import random
+# # Importing Modules
+# import pygame
+# import requests
+# import rembg
+# from io import BytesIO
+
+from enum import Enum
+from collections import namedtuple
+
+
 class Engine:
     
     def evaluate(self, board): # evaluate the moves of each piece by score
@@ -72,28 +80,55 @@ class Engine:
         for d in range(1, depth + 1):
             bestMove = self.best_move(board, d)
         return bestMove
-    
-def main():
-    
-    board = chess.Board()
-    engine = Engine()
-    
-    while not board.is_game_over():
-        print(board)
-        legal = [board.legal_moves]    
-        if board.turn == chess.WHITE:
-            """
-            print(legal)
-            move = input("Enter a move: ")
-            board.push_san(move)
-            """
-            move = random.choice(list(board.legal_moves))
-            board.push(move)
-        else:
-            move = engine.bestDepth(board)
-            board.push(move)
-    print("Game Over")
-    
 
-if __name__=="__main__":
+
+
+class Color(Enum):
+    WHITE = 0
+    BLACK = 1
+
+
+class PieceType(Enum):
+    PAWN = 1
+    KNIGHT = 2
+    BISHOP = 3
+    ROOK = 4
+    QUEEN = 5
+    KING = 6
+
+class Move:
+    pass
+
+Piece = namedtuple('PieceType', 'Color, Move')
+
+RANKS, FILES = 8, 8
+class Board:
+
+    def __init__(self):
+        self.board = [['*' for _ in range(RANKS)]for _ in range(FILES)]
+        self.board[0] = ['wR','wN','wB','wQ','wK','wB','wN','wR']    
+        self.board[1] = ['wP'] * 8    
+        self.board[6] = ['bR','bN','bB','bQ','bK','bB','bN','bR']    
+        self.board[7] = ['bP'] * 8
+
+    def __str__(self):
+        rows = []
+        for row in self.board:
+            rows.append(' '.join(f'{p:2}' for p in row))
+        return '\n'.join(rows)
+
+
+def main():
+    board = Board()
+    # engine = Engine()
+    gameOver = False
+    print(board)
+    
+    # while not gameOver:
+        
+
+
+    #     gameOver = True
+
+if __name__ == "__main__":
     main()
